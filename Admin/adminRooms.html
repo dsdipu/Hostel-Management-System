@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex">
+
+
+    <div class="w-64 bg-green-600 text-white min-h-screen p-5">
+        <h2 class="text-2xl font-bold mb-6">Admin Panel</h2>
+        <ul class="space-y-3">
+            <li><a href="adminDashboard.html" class="block hover:bg-blue-700 p-2 rounded">Dashboard</a></li>
+            <li><a href="adminStudents.html" class="block hover:bg-blue-700 p-2 rounded">Students</a></li>
+            <li><a href="adminRooms.html" class="block bg-blue-700 p-2 rounded">Rooms</a></li>
+            <li><a href="adminPayments.html" class="block hover:bg-blue-700 p-2 rounded">Payments</a></li>
+        </ul>
+    </div>
+
+    <div class="flex-1 p-6">
+
+        <h1 class="text-3xl font-bold mb-6">Room Management</h1>
+
+
+        <div class="bg-white p-5 rounded shadow mb-6">
+            <h2 class="text-xl font-semibold mb-4">Add New Room</h2>
+
+            <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input type="text" placeholder="Room Number" class="border p-2 rounded">
+                
+                <select class="border p-2 rounded">
+                    <option>Single</option>
+                    <option>Double</option>
+                </select>
+
+                <input type="number" placeholder="Capacity" class="border p-2 rounded">
+
+                <button class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 md:col-span-3">
+                    Add Room
+                </button>
+            </form>
+        </div>
+
+
+        <div class="bg-white p-5 rounded shadow">
+            <h2 class="text-xl font-semibold mb-4">Room List</h2>
+
+            <table class="w-full border border-gray-300">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="p-2 border">Room No</th>
+                        <th class="p-2 border">Type</th>
+                        <th class="p-2 border">Capacity</th>
+                        <th class="p-2 border">Occupancy</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td class="p-2 border">101</td>
+                        <td class="p-2 border">Single</td>
+                        <td class="p-2 border">1</td>
+                        <td class="p-2 border">1</td>
+                    </tr>
+
+                    <tr>
+                        <td class="p-2 border">102</td>
+                        <td class="p-2 border">Double</td>
+                        <td class="p-2 border">2</td>
+                        <td class="p-2 border">1</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
