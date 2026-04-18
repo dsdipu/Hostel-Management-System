@@ -28,6 +28,7 @@ $rooms = $connect->query("SELECT * FROM rooms");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
     <title>Room Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
