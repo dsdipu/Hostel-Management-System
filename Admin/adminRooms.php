@@ -1,3 +1,28 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin_logged_in'])) {
+    header("Location: adminLogin.php");
+    exit();
+}
+include "../php/dbConnect.php";
+
+// Add room logic
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_room'])) {
+    $roomNumber = $_POST['room_number'];
+    $roomType = $_POST['room_type'];
+    $capacity = $_POST['capacity'];
+    
+    $insert = $connect->query("INSERT INTO rooms (room_number, room_type, capacity, occupancy, created_at) 
+                               VALUES ('$roomNumber', '$roomType', '$capacity', 0, NOW())");
+    if ($insert) {
+        header("Location: adminRooms.php");
+        exit();
+    }
+}
+
+// Fetch all rooms
+$rooms = $connect->query("SELECT * FROM rooms");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,26 +32,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex">
-
-    <?php
-    include "../php/dbConnect.php";
-
-    // Add room logic
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_room'])) {
-        $roomNumber = $_POST['room_number'];
-        $roomType = $_POST['room_type'];
-        $capacity = $_POST['capacity'];
-        
-        $insert = $connect->query("INSERT INTO rooms (room_number, room_type, capacity) VALUES ('$roomNumber', '$roomType', '$capacity')");
-        if ($insert) {
-            header("Location: adminRooms.php");
-            exit();
-        }
-    }
-
-    // Fetch all rooms
-    $rooms = $connect->query("SELECT * FROM rooms");
-    ?>
 
     <div class="w-64 bg-green-600 text-white min-h-screen p-5">
         <h2 class="text-2xl font-bold mb-6">Admin Panel</h2>

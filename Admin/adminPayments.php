@@ -11,22 +11,23 @@
     <?php
     include "../php/dbConnect.php";
 
-    // Add payment logic
+    // Add payment logic with created_at
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_payment'])) {
         $studentId = $_POST['student_id'];
         $month = $_POST['month'];
         $amount = $_POST['amount'];
         $status = $_POST['status'];
         
-        $insert = $connect->query("INSERT INTO payments (student_id, month, amount, status) VALUES ('$studentId', '$month', '$amount', '$status')");
+        $insert = $connect->query("INSERT INTO payments (student_id, month, amount, status, created_at) 
+                                   VALUES ('$studentId', '$month', '$amount', '$status', NOW())");
         if ($insert) {
             header("Location: adminPayments.php");
             exit();
         }
     }
 
-    // Fetch all payments
-    $payments = $connect->query("SELECT * FROM payments ORDER BY payment_id DESC");
+    // Fetch all payments with time
+    $payments = $connect->query("SELECT * FROM payments ORDER BY created_at DESC");
     ?>
 
     <div class="w-64 bg-green-600 text-white min-h-screen p-5">
@@ -73,6 +74,7 @@
                         <th class="p-2 border">Month</th>
                         <th class="p-2 border">Amount</th>
                         <th class="p-2 border">Status</th>
+                        <th class="p-2 border">Date & Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,6 +86,7 @@
                         <td class="p-2 border <?php echo ($row['status'] == 'Paid') ? 'text-green-500' : 'text-red-500'; ?>">
                             <?php echo $row['status']; ?>
                         </td>
+                        <td class="p-2 border"><?php echo date('d/m/Y h:i A', strtotime($row['created_at'])); ?></td>
                     </tr>
                     <?php endwhile; ?>
                 </tbody>
